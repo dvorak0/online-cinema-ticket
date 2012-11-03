@@ -4,25 +4,25 @@ OnlineCinemaTicket::Application.routes.draw do
   resources :actors
 
   controller :sessions do
-    get 'login' => :new
-    post 'login' => :create 
+    get 'login'     => :new
+    post 'login'    => :create
     delete 'logout' => :destroy
   end
 
   resources :store
 
   controller :store do
-    get 'index' => :index
-    get 'show_now' => :show_now
+    get 'index'      => :index
+    get 'show_now'   => :show_now
     get 'show_after' => :show_after
-    get 'about' => :about
+    get 'about'      => :about
   end
     
   resources :accounts 
 
   controller :accounts do
     get 'newuser' => :new
-    get 'detail' => :detail
+    get 'detail'  => :detail
   end
 
   controller :choose do
