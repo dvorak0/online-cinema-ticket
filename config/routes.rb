@@ -1,4 +1,44 @@
+#encoding: utf-8
 OnlineCinemaTicket::Application.routes.draw do
+
+  resources :actors
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create 
+    delete 'logout' => :destroy
+  end
+
+  resources :store
+
+  controller :store do
+    get 'index' => :index
+    get 'show_now' => :show_now
+    get 'show_after' => :show_after
+    get 'about' => :about
+  end
+    
+  resources :accounts 
+
+  controller :accounts do
+    get 'newuser' => :new
+    get 'detail' => :detail
+  end
+
+  controller :choose do
+    get 'show_seat' => :show_seat
+  end
+  
+  resources :tickets
+
+  resources :films
+
+  controller :film do
+    get 'moreinfo' => :moreinfo
+  end
+
+  resources :about
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,11 +88,11 @@ OnlineCinemaTicket::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'store#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  match ':controller(/:action(/:id))(.:format)'
 end

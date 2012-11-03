@@ -1,0 +1,48 @@
+<style type="text/css">
+
+body {
+	text-align:center; 
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+</style>
+
+
+
+<h1>为电影选择座位</h1>
+<h2><<<%= @film.title %>>></h2>
+
+<% @times.each do |time| %>
+
+<h4><%= time %></h4>
+<% tks=@tickets.find(:all, :conditions => ["time=?",time]) %>
+
+<% k=0 %>
+<table>
+	<img class="screen" src="images/screen.gif"></img>
+	<% for i in 1 .. 10 do %>
+	<tr>
+		<% for j in 1 .. 10 do %>
+		<td>
+			<img src=
+			<% if tks[k].onsale==true %>
+			<%= "/images/green.gif" %>
+			<% else %>
+			<%= "/images/pink.gif" %>
+			<% end %>
+
+			<% k+=1 %>
+		</td>
+		<% end %>
+
+
+
+	</tr>
+	<% end %>
+</table>
+
+<% end %>
