@@ -4,11 +4,11 @@ class StoreController < ApplicationController
 	end
 
 	def show_now
-		@films = Film.all
+		@films = Film.find(:all, :conditions => ["time < ?", Time.now])
 	end
 
 	def show_after
-		@films = Film.all
+		@films = Film.find(:all, :conditions => ["time > ?", Time.now])
 	end
 
 	def about

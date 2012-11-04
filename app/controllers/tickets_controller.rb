@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
+  public
   def index
     @tickets = Ticket.all
 
@@ -25,6 +26,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new.json
   def new
     @ticket = Ticket.new
+    @films = Film.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,16 +42,19 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    @ticket = Ticket.new(params[:ticket])
+    params[:ticket][:onsale] = true
+    for i in 1 .. 10 do
+      for j in 1 .. 10 do
+        ticket = Ticket.new(params[:ticket])
+        ticket[:row]    = i
+        ticket[:colume] = j
+        ticket.save
+      end
+    end
 
     respond_to do |format|
-      if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to index_url }
         format.json { render json: @ticket, status: :created, location: @ticket }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
     end
   end
 

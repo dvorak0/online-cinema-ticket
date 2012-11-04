@@ -80,6 +80,8 @@ class FilmsController < ApplicationController
   # DELETE /films/1.json
   def destroy
     @film = Film.find(params[:id])
+    @film.tickets.destroy_all
+    @film.actors.destroy_all
     @film.destroy
 
     respond_to do |format|

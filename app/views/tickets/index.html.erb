@@ -1,35 +1,27 @@
-<h1>Listing tickets</h1>
+<h1>现有场次</h1>
 
-<table>
+<table class="table table-bordered">
   <tr>
-    <th>Film</th>
-    <th>Time</th>
-    <th>Room</th>
-    <th>Colume</th>
-    <th>Row</th>
-    <th>Price</th>
-    <th>Onsale</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>电影</th>
+    <th>播放时间</th>
+    <th>播放厅</th>
+    <th>价钱</th>
+    <th>票数</th>
   </tr>
+  <% ticket_groups = @tickets.group_by{|t| [t.film_id,t.time]} %>
 
-<% @tickets.each do |ticket| %>
-  <tr>
-    <td><%= ticket.film_id %></td>
-    <td><%= ticket.time %></td>
-    <td><%= ticket.room %></td>
-    <td><%= ticket.colume %></td>
-    <td><%= ticket.row %></td>
-    <td><%= ticket.price %></td>
-    <td><%= ticket.onsale %></td>
-    <td><%= link_to 'Show', ticket %></td>
-    <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-    <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% ticket_groups.each do |arr,tickets| %>
+  <% tkt = tickets.first %>
+    <tr>
+      <td><%= tkt.film.title %></td>
+      <td><%= tkt.time %></td>
+      <td><%= tkt.room %></td>
+      <td><%= tkt.price %></td>
+      <td><%= tickets.count %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<%= link_to '添加场次', new_ticket_path %>

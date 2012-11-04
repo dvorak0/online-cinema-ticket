@@ -1,12 +1,20 @@
 #encoding: utf-8
 OnlineCinemaTicket::Application.routes.draw do
 
+  resources :administrators
+
+  controller :administrators do
+    get 'admin' => :admin
+  end
+
   resources :actors
 
   controller :sessions do
-    get 'login'     => :new
-    post 'login'    => :create
-    delete 'logout' => :destroy
+    get 'admin_login'  => :admin_new
+    post 'admin_login' => :admin_create
+    get 'login'        => :new
+    post 'login'       => :create
+    delete 'logout'    => :destroy
   end
 
   resources :store
