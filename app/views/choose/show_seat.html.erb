@@ -1,48 +1,74 @@
-<style type="text/css">
+<h1>为电影选择座位</h1>
 
-body {
-	text-align:center; 
-}
+<style type="text/css" media="screen">
+  .box {
+    display:none;
+  }
+  body {
+    text-align:center; 
+  }
 
-table {
-	margin-left: auto;
-	margin-right: auto;
-}
+  table {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 </style>
 
+<script type="text/javascript" charset="utf-8">
+  function change(obj){
+    if(obj.src.indexOf('pink.gif') != -1)
+      obj.src = obj.src.replace('pink.gif','green.gif');
+    else if(obj.src.indexOf('green.gif') != -1)
+      obj.src = obj.src.replace('green.gif','pink.gif');
+  }
 
+</script>
+<%= form_tag ensure_order_url do %>
+<table class='table'>
 
-<h1>为电影选择座位</h1>
-<h2><<<%= @film.title %>>></h2>
+  <tr>
+    <td></td>
+    <% for j in 1..10 do %>
+      <td>
+        第<%=j%>列
+      </td>
+    <% end %>
+  </tr>
+  <% for i in 1..10 do %>
+    <tr>
+      <td>
+        第<%=i%>行
+      </td>
+      <% for j in 1..10 do %>
+        <td>
+          <% if @position[i][j] == true %>
+          <label>
+            <img src = "/images/green.gif" onclick="change(this)">
+            <input type='checkbox' class = 'box' value = <%=@ticketids[i][j]%> name = 'ids[]'>
+          </label>
+          <% else %>
+          <img src = "/images/red.gif">
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+      <%= submit_tag "确认购票", :class=>'btn' %>
+    </td>
 
-<% @times.each do |time| %>
-
-<h4><%= time %></h4>
-<% tks=@tickets.find(:all, :conditions => ["time=?",time]) %>
-
-<% k=0 %>
-<table>
-	<img class="screen" src="images/screen.gif"></img>
-	<% for i in 1 .. 10 do %>
-	<tr>
-		<% for j in 1 .. 10 do %>
-		<td>
-			<img src=
-			<% if tks[k].onsale==true %>
-			<%= "/images/green.gif" %>
-			<% else %>
-			<%= "/images/pink.gif" %>
-			<% end %>
-
-			<% k+=1 %>
-		</td>
-		<% end %>
-
-
-
-	</tr>
-	<% end %>
+  </tr>
 </table>
-
 <% end %>

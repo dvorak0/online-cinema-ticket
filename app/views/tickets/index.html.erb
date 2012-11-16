@@ -6,18 +6,14 @@
     <th>播放时间</th>
     <th>播放厅</th>
     <th>价钱</th>
-    <th>票数</th>
   </tr>
-  <% ticket_groups = @tickets.group_by{|t| [t.film_id,t.time]} %>
-
-  <% ticket_groups.each do |arr,tickets| %>
-  <% tkt = tickets.first %>
+  <% @ticket_groups.each do |t,ticket_group| %>
+    <% tkt = ticket_group.first %>
     <tr>
       <td><%= tkt.film.title %></td>
       <td><%= tkt.time %></td>
       <td><%= tkt.room %></td>
       <td><%= tkt.price %></td>
-      <td><%= tickets.count %></td>
     </tr>
   <% end %>
 </table>

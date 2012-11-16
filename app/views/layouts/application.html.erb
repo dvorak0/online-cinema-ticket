@@ -40,10 +40,11 @@
             <%= link_to '退出登录', logout_url, :class=>"btn", :method => :delete %>
             <% elsif session[:admin_id] != nil %>
             <%= link_to '管理',admin_url, :class=>"btn" %>
-            <%= link_to '退出登录', logout_url, :class=>"btn", :method => :delete %>
+            <%= link_to '退出登录', logout_url, :method=>"delete",:class=>"btn", :method => :delete %>
             <% else %>
-            <%= link_to '登录', login_url, :class=>'btn' %>
+            <%= link_to '用户登录', login_url, :class=>'btn' %>
             <%= link_to '注册', newuser_url, :class=>'btn' %>
+            <%= link_to '管理员登录', admin_login_url, :class=>'btn' %>
             <% end %>
           </form>
 
@@ -55,7 +56,11 @@
 
 
   <div class="container">
+  <% if flash[:notice] %>
+  <h1 id="notice"><%= flash[:notice] %></h1> 
+  <% end %>
     <%= yield %>
   </div>
+
 </body>
 </html>

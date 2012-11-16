@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     @account[:score] = 100
-    @account[:balance] = 100
+    @account[:balance] = 1000
 
     respond_to do |format|
       if @account.save
@@ -85,5 +85,8 @@ class AccountsController < ApplicationController
 
   def detail
     @account = Account.find_by_id(session[:account_id])
+  end
+
+  def authorize
   end
 end

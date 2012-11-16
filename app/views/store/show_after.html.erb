@@ -49,8 +49,9 @@
         		<h4>剧情简介：</h4>
         		<p><%= film.description.slice(0,90)+'......' %></p>
         	</div>
-        	<div class="dir">
-        		<button class="btn">详细信息</button>
+          <div class="dir">
+            <%= link_to '详细信息', film, :class=>"btn"%>
+
         	</div>
         </td></tr>
     	</table>

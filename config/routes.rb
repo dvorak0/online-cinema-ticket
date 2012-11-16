@@ -1,6 +1,10 @@
 #encoding: utf-8
 OnlineCinemaTicket::Application.routes.draw do
 
+  resources :order_lines
+
+  resources :orders
+
   resources :administrators
 
   controller :administrators do
@@ -34,7 +38,10 @@ OnlineCinemaTicket::Application.routes.draw do
   end
 
   controller :choose do
-    get 'show_seat' => :show_seat
+    get 'show_ticket' => :show_ticket
+    get 'show_seat'   => :show_seat
+    post 'ensure_order' => :ensure_order
+    get 'ensure_order' => :ensure_order
   end
   
   resources :tickets

@@ -6,12 +6,12 @@ class AddTestTicket < ActiveRecord::Migration
       for j in 1 .. 10 do
         Ticket.create(
           :film_id => 1,
-          :time => '2012-11-02 21:30',
-          :room => 1,
-          :colume => i,
-          :row => j,
-          :price => 70,
-          :onsale => true
+          :time    => '2012-11-02 21:30',
+          :room    => 1,
+          :colume  => j,
+          :row     => i,
+          :price   => 70,
+          :onsale  => true
         )
       end
     end
@@ -20,12 +20,12 @@ class AddTestTicket < ActiveRecord::Migration
       for j in 1 .. 10 do
         Ticket.create(
           :film_id => 1,
-          :time => '2012-11-02 19:30',
-          :room => 1,
-          :colume => i,
-          :row => j,
-          :price => 70,
-          :onsale => true
+          :time    => '2012-11-02 19:30',
+          :room    => 1,
+          :colume  => j,
+          :row     => i,
+          :price   => 85,
+          :onsale  => true
         )
       end
     end
@@ -52,7 +52,7 @@ class AddTestTicket < ActiveRecord::Migration
           :room => 1,
           :colume => i,
           :row => j,
-          :price => 70,
+          :price => 120,
           :onsale => true
         )
       end

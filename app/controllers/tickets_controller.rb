@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   # GET /tickets.json
   public
   def index
-    @tickets = Ticket.all
+    @ticket_groups = Ticket.all.group_by{|t| [t.film_id,t.time]}
 
     respond_to do |format|
       format.html # index.html.erb

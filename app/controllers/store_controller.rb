@@ -13,4 +13,7 @@ class StoreController < ApplicationController
 
 	def about
 	end
+
+  def authorize
+  end
 end

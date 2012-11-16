@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	def create
 		account = Account.find_by_username(params[:name])
 		if account and account.authenticate(params[:password])
-			session[:account_id] = account.id
+			session[:account_id]       = account.id
 			session[:account_username] = account.username
 			redirect_to show_now_url
 		else
@@ -15,10 +15,10 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		session[:account_id]       = nil
-		session[:account_username] = nil
+    session[:account_id]       = nil
+    session[:account_username] = nil
     session[:admin_id]         = nil
-		redirect_to index_url
+    redirect_to index_url
   end
 
   def admin_new
@@ -32,7 +32,9 @@ class SessionsController < ApplicationController
     else
       redirect_to admin_login_url, alert: "用户名/密码错误" 
     end
+  end
 
-
+  def authorize
+    
   end
 end

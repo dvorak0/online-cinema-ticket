@@ -11,19 +11,19 @@
     </select>
   </div>
   <div class="field">
-    <%= f.label :time %><br />
+    <%= f.label :time, '放映时间' %><br />
     <%= f.datetime_select :time %>
   </div>
   <div class="field">
-    <%= f.label :room %><br />
+    <%= f.label :room, '放映厅' %><br />
     <%= f.number_field :room %>
   </div>
  <div class="field">
-    <%= f.label :price %><br />
+    <%= f.label :price, '价钱' %><br />
     <%= f.text_field :price %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '确认添加' %>
   </div>
 <% end %>
-<%= link_to 'Back', tickets_path %>
+<%= link_to '返回', tickets_path %>

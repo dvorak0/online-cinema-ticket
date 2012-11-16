@@ -1,4 +1,5 @@
 class FilmsController < ApplicationController
+  before_filter :authorize, :except => :show
   # GET /films
   # GET /films.json
   def index
