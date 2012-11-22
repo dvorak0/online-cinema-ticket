@@ -1,3 +1,4 @@
+#encoding: utf-8
 class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
@@ -43,18 +44,23 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     params[:ticket][:onsale] = true
+    suc = true
     for i in 1 .. 10 do
       for j in 1 .. 10 do
         ticket = Ticket.new(params[:ticket])
         ticket[:row]    = i
         ticket[:colume] = j
-        ticket.save
+        suc &= ticket.save
       end
     end
 
     respond_to do |format|
-        format.html { redirect_to index_url }
+      if suc
+        format.html { redirect_to  }
         format.json { render json: @ticket, status: :created, location: @ticket }
+      else
+        format.html { redirect_to :back,:notice => "请检查场次信息" }
+      end
     end
   end
 

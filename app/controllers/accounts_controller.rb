@@ -41,11 +41,13 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(params[:account])
-    @account[:score] = 100
-    @account[:balance] = 1000
+    @account[:score]     = 100
+    @account[:balance]   = 1000
 
     respond_to do |format|
       if @account.save
+        session[:account_id] = @account.id
+        session[:account_username] = @account.username
         format.html { redirect_to index_url }
         format.json { render json: @account, status: :created, location: @account }
       else

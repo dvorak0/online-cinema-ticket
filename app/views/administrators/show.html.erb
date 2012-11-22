@@ -1,15 +1,18 @@
-<p id="notice"><%= notice %></p>
+<p>成功更新！</p>
+<style type="text/css" </style>
+#notice {
+  display: none:
+  }
+</style>
 
 <p>
-  <b>Username:</b>
+  <b>管理员:</b>
   <%= @administrator.username %>
 </p>
 
 <p>
-  <b>Password digest:</b>
+  <b>密文密码：</b>
   <%= @administrator.password_digest %>
 </p>
 
 
-<%= link_to 'Edit', edit_administrator_path(@administrator) %> |
-<%= link_to 'Back', administrators_path %>

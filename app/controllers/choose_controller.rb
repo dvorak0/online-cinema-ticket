@@ -20,7 +20,12 @@ class ChooseController < ApplicationController
   end
 
   def ensure_order
-    if session[:account_id] != nil
+
+    if params[:ids] == nil
+      redirect_to :back, :alert => "请至少选择一张票"
+    elsif session[:account_id] == nil
+      redirect_to login_url, alert: "请先登录" 
+    else
       @account = Account.find_by_id(session[:account_id])
       @sumprice = params[:ids].sum{|id| Ticket.find_by_id(id).price}
 
@@ -33,26 +38,29 @@ class ChooseController < ApplicationController
         @sumprice *= 0.7
       end
 
-      if @sumprice <= @account.balance 
+      @can = true
+      params[:ids].each do |id|
+        @can &= Ticket.find_by_id(id).onsale
+      end
+
+
+      if @can == false
+        redirect_to :back, :alert => "很不幸，您的票已经被购买，请重新购票"
+      elsif @sumprice > @account.balance
+        redirect_to :back, :alert => "账户余额不足"
+      else
         @account.balance -= @sumprice
         @account.score += @sumprice
         @account.save(:validate => false)
-
-      else
-        redirect_to detail_url, :alert => "账户余额不足"
+        @order = @account.orders.create(:time=>Time.now,:price=>@sumprice);
+        params[:ids].each do |id|
+          @order.order_lines.create(:ticket_id=>id)
+          @tmp = Ticket.find_by_id(id)
+          @tmp.onsale=false
+          @tmp.save
+        end
+        @account.orders<<@order
       end
-
-      @order = @account.orders.create(:time=>Time.now,:price=>@sumprice);
-      params[:ids].each do |id|
-        @order.order_lines.create(:ticket_id=>id)
-        @tmp = Ticket.find_by_id(id)
-        @tmp.onsale=false
-        @tmp.save
-      end
-      @account.orders<<@order
-
-    else
-      redirect_to login_url, alert: "请先登录" 
     end
   end
 

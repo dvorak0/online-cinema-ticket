@@ -24,6 +24,11 @@
   }
 
 </script>
+
+<% if flash[:alert] %>
+<p id="notice"><%= flash[:alert] %></p> 
+<% end %>
+
 <%= form_tag ensure_order_url do %>
 <table class='table'>
 

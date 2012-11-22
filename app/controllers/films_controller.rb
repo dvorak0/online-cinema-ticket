@@ -65,6 +65,14 @@ class FilmsController < ApplicationController
   # PUT /films/1.json
   def update
     @film = Film.find(params[:id])
+    actornames = params[:actors].split(',')
+    actornames.each do |actorname|
+      actor = Actor.new
+      actor.film_id = @film.id
+      actor.name = actorname
+      @film.actors << actor
+    end
+
 
     respond_to do |format|
       if @film.update_attributes(params[:film])

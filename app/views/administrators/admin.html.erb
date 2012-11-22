@@ -53,3 +53,4 @@
 <h1>管理</h1><br/>
 <%= link_to '电影管理', films_url, :class=>"btn" %>
 <%= link_to '场次管理', tickets_url, :class=>"btn" %>
+<%= link_to '更改管理员密码', edit_administrator_path(session[:admin_id]), :class=>"btn" %>

@@ -4,7 +4,22 @@ class StoreController < ApplicationController
 	end
 
 	def show_now
-		@films = Film.find(:all, :conditions => ["time < ?", Time.now])
+		@tmpfilms = Film.find(:all, :conditions => ["time < ?", Time.now])
+    @films = []
+    @tmpfilms.each do |f|
+      can = false
+      if f.tickets 
+        f.tickets.each do |t|
+          if t.time >= Time.now
+            can = true
+          end
+        end
+      end
+      if can 
+        @films << f
+      end
+    end
+
 	end
 
 	def show_after

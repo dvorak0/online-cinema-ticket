@@ -1,7 +1,7 @@
 <%= form_for(@film) do |f| %>
   <% if @film.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2>
+      <h2><%=@film.errors.count %>个错误被发现，请重新填写！ </h2>
 
       <ul>
       <% @film.errors.full_messages.each do |msg| %>
